@@ -5,6 +5,7 @@ export const ThemeContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const ThemeProvider = ({ children }) => {
   const [stepRegister, setStepRegister] = useState(0);
+  const [forgot, setForgot] = useState(false);
 
   // STEP Register
   const [fichaName, setFichaName] = useState("");
@@ -24,6 +25,8 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider
       value={{
+        forgot,
+        setForgot,
         stepRegister,
         fichaArea,
         fichaAttention,

@@ -11,21 +11,21 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
   --brown: #1B0D01;
-  --brown-light: ##8133f1;
+  --brown-light: #311602;
 
   --primary: #1B0D01;
-  --primary-light: #8133f1;
+  --primary-light: #311602;
   --secondary: #0054da;
   --secondary-light: #337df3;
   --third: #5ABCD5;
   --blue: #3F6FE8;
 
   --gray01: #171416;
-  --gray02: #E9ECEF;
+  --gray02: #252023;
   --gray03: #595356;
   --gray04: #7f7b7d;
   --gray05: #a8a5a6;
-  --gray06: #a8a5a6;
+  --gray06: #F7F7FC;
 
   --white: #F7F7FC;
 }
@@ -84,42 +84,42 @@ li {
 }
 
 .body24 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 24px;
   font-weight: 400;
   line-height: 40px;
 }
 
 .body18 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 18px;
   font-weight: 400;
   line-height: 30px;
 }
 
 .body16 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 18px;
   font-weight: 300;
   line-height: 26px;
 }
 
 .body16 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 16px;
   font-weight: 400;
   line-height: 28px;
 }
 
 .body14 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 14px;
   line-height: 22px;
   font-weight: 400;
 }
 
 .body12 {
-  font-family: "Inter";
+  font-family: "Roboto";
   font-size: 12px;
   line-height: 20px;
   font-weight: 400;
@@ -131,7 +131,7 @@ li {
   line-height: 20px;
   font-weight: 700;
   border: none;
-  cursor: poInter;
+  cursor: poRoboto;
 }
 
 .button14 {
@@ -140,7 +140,7 @@ li {
   line-height: 16px;
   font-weight: 500;
   border: none;
-  cursor: poInter;
+  cursor: poRoboto;
 }
 
 .link16 {
@@ -149,7 +149,7 @@ li {
   line-height: 18px;
   font-weight: 400;
   border: none;
-  cursor: poInter;
+  cursor: poRoboto;
 }
 
 .link14 {
@@ -158,7 +158,7 @@ li {
   line-height: 16px;
   font-weight: 400;
   border: none;
-  cursor: poInter;
+  cursor: poRoboto;
 }
 
 .overline16 {
@@ -291,7 +291,7 @@ button {
 }
 
 .button_primary_light {
-  background: var(--primary);
+  background: var(--primary-light);
   color: var(--white);
 }
 
@@ -308,9 +308,18 @@ button {
   transform: scale(0.98);
 }
 
+.button_transparent {
+  background-color: transparent;
+  color: var(--primary-light);
+}
+
+.button_transparent:hover {
+  transform: scale(0.98);
+}
+
 .button_disable {
   opacity: 0.5;
-  poInter-events: none;
+  pointer-events: none;
 }
 
 .full_width {
@@ -324,6 +333,7 @@ button {
 .button {
   padding: 8px 24px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -386,31 +396,31 @@ button {
 }
 
 .margin4 {
-  margin-bottom: 4px !important;
+  margin-bottom: 4px;
 }
 
 .margin8 {
-  margin-bottom: 8px !important;
+  margin-bottom: 8px;
 }
 
 .margin12 {
-  margin-bottom: 12px !important;
+  margin-bottom: 12px;
 }
 
 .margin16 {
-  margin-bottom: 16px !important;
+  margin-bottom: 16px;
 }
 
 .margin20 {
-  margin-bottom: 20px !important;
+  margin-bottom: 20px;
 }
 
 .margin24 {
-  margin-bottom: 24px !important;
+  margin-bottom: 24px;
 }
 
 .margin32 {
-  margin-bottom: 32px !important;
+  margin-bottom: 32px;
 }
 
 .ajust_gap4 {
@@ -445,8 +455,8 @@ button {
   display: none;
 }
 
-.pointer {
-  cursor: poInter;
+.poRoboto {
+  cursor: poRoboto;
 }
 .relative {
   position: relative;
