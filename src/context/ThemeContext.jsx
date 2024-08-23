@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const ThemeProvider = ({ children }) => {
-  const [stepRegister, setStepRegister] = useState(0);
+  const [stepRegister, setStepRegister] = useState(1);
   const [forgot, setForgot] = useState(false);
 
   // STEP Register
@@ -16,10 +16,13 @@ export const ThemeProvider = ({ children }) => {
   const [fichaBirthday, setFichaBirthday] = useState("");
   const [fichaEmail, setFichaEmail] = useState("");
   const [fichaPassword, setFichaPassword] = useState("");
+
   const [fichaAttention, setFichaAttention] = useState("");
   const [fichaArea, setFichaArea] = useState("");
   const [fichaLenguages, setFichaLenguages] = useState([]);
   const [fichaWork, setFichaWork] = useState("");
+  const [fichaTime, setFichaTime] = useState("");
+  const [fichaLike, setFichaLike] = useState("");
   const [fichaAvatar, setFichaAvatar] = useState("");
 
   return (
@@ -28,6 +31,8 @@ export const ThemeProvider = ({ children }) => {
         forgot,
         setForgot,
         stepRegister,
+        fichaLike,
+        fichaTime,
         fichaArea,
         fichaAttention,
         fichaAvatar,
@@ -35,10 +40,10 @@ export const ThemeProvider = ({ children }) => {
         fichaCity,
         fichaEmail,
         fichaEstado,
-        fichaLenguages,
         fichaName,
         fichaPassword,
         fichaPhone,
+        fichaLenguages,
         fichaWork,
         fichaSexo,
         setStepRegister,
@@ -49,12 +54,14 @@ export const ThemeProvider = ({ children }) => {
         setFichaCity,
         setFichaEmail,
         setFichaEstado,
-        setFichaLenguages,
         setFichaName,
         setFichaPassword,
         setFichaPhone,
+        setFichaLenguages,
         setFichaWork,
         setFichaSexo,
+        setFichaLike,
+        setFichaTime,
       }}>
       {children}
     </ThemeContext.Provider>
