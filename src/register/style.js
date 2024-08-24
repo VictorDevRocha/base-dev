@@ -115,6 +115,28 @@ export const ContainerRegister = styled.section`
       justify-content: center;
     }
   }
+
+  @media (max-width: 768px) {
+    .content_step {
+      margin: 32px 20px;
+
+      .mid_step {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h4 {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    .content_step {
+      padding: 32px 20px;
+    }
+  }
 `;
 
 export const ModalCheck = styled.div`

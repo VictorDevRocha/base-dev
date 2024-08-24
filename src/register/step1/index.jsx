@@ -25,7 +25,6 @@ export const Step1Register = () => {
   } = useContext(ThemeContext);
 
   const base_url = process.env.REACT_APP_BASE_URL;
-
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -155,6 +154,7 @@ export const Step1Register = () => {
       emailRegex.test(fichaEmail) &&
       fichaName.length >= 5 &&
       fichaPassword.length >= 8 &&
+      emailUsed == false &&
       confirmPassword == fichaPassword
     ) {
       setValid(true);
@@ -162,7 +162,7 @@ export const Step1Register = () => {
       setValid(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fichaEmail, fichaName, fichaPassword, confirmPassword]);
+  }, [fichaEmail, fichaName, fichaPassword, confirmPassword, emailUsed]);
 
   return (
     <div className="content_step">
@@ -214,6 +214,9 @@ export const Step1Register = () => {
               onChange={(e) => {
                 setFichaSexo(e.target.value);
               }}>
+              <option value="" disabled>
+                Selecione
+              </option>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
             </select>

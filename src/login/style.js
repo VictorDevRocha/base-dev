@@ -81,7 +81,7 @@ export const ContainerLogin = styled.section`
     padding: 60px 20px;
 
     .box_form {
-      padding: 48px 24px;
+      padding: 60px 32px 48px;
       min-height: fit-content;
 
       .logo {

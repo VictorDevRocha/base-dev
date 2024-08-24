@@ -1,26 +1,52 @@
 import { ContainerLogin } from "./style";
 import { Footer } from "./../footer/index";
 import logo from "/logo.svg";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { ForgotPassword } from "./forgot";
 import { ThemeContext } from "./../context/ThemeContext";
+import axios from "axios";
 
 export const Login = () => {
+  const { forgot, setForgot } = useContext(ThemeContext);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const { forgot, setForgot } = useContext(ThemeContext);
+  const [valid, setValid] = useState(false);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const history = useNavigate();
+
+  const base_url = process.env.REACT_APP_BASE_URL;
+
+  useEffect(() => {
+    if (emailRegex.test(login) && password.length >= 8) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [password, login]);
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (emailRegex.test(login) && password.length >= 8) {
-      alert("passei");
+      axios
+        .post(`${base_url}/Login`, {
+          email: login,
+          password: password,
+        })
+        .then((response) => {
+          localStorage.setItem("idUser", response.data.id);
+          localStorage.setItem("token", response.data.id);
+          history("/dashboard");
+        })
+        .catch((error) => {
+          alert(error.response.data.error);
+        });
     } else {
-      alert("não passei");
+      alert("Preencha os dados corretamente!");
     }
   };
 
@@ -94,7 +120,6 @@ export const Login = () => {
                   />
                   <p className="body12 font400 primary">Mínimo de 8 caracteres</p>
                 </div>
-
                 <p
                   className="body14 font400 primary end"
                   onClick={() => {
@@ -103,7 +128,13 @@ export const Login = () => {
                   Esqueceu a senha ?
                 </p>
 
-                <button type="submit" className="button_primary_light button button16 font700">
+                <button
+                  type="submit"
+                  className={
+                    valid
+                      ? "button_primary_light button button16 font700"
+                      : "button_primary_light button button16 font700 button_disable"
+                  }>
                   ENTRAR
                 </button>
               </form>
