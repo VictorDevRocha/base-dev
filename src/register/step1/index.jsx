@@ -24,9 +24,20 @@ export const Step1Register = () => {
     setFichaSexo,
   } = useContext(ThemeContext);
 
+  const base_url = process.env.REACT_APP_BASE_URL;
+
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
   const [cities, setCities] = useState([]);
   const [estados, setEstados] = useState([]);
   const [valid, setValid] = useState(false);
+  const [emails, setEmails] = useState([]);
+  const [emailUsed, setEmailUsed] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,6 +45,11 @@ export const Step1Register = () => {
     axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/").then((response) => {
       setEstados(response.data);
     });
+
+    axios.get(`${base_url}/listar-emails`, config).then((response) => {
+      setEmails(response.data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -90,8 +106,19 @@ export const Step1Register = () => {
 
     setFichaEmail(email);
 
+    const filtrado = emails.filter((filtro) => {
+      return filtro.email == e.target.value;
+    });
+
     if (emailRegex.test(email)) {
       e.target.classList.remove("error");
+
+      if (filtrado[0]) {
+        e.target.classList.add("error");
+        setEmailUsed(true);
+      } else {
+        setEmailUsed(false);
+      }
     } else {
       e.target.classList.add("error");
     }
@@ -107,6 +134,16 @@ export const Step1Register = () => {
     }
   };
 
+  const handleRePasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+
+    if (e.target.value == fichaPassword) {
+      e.target.classList.remove("error");
+    } else {
+      e.target.classList.add("error");
+    }
+  };
+
   const handleNextStep = () => {
     if (fichaPassword.length >= 8 && fichaName.length >= 5) {
       setStepRegister(2);
@@ -114,13 +151,18 @@ export const Step1Register = () => {
   };
 
   useEffect(() => {
-    if (emailRegex.test(fichaEmail) && fichaName.length >= 5 && fichaPassword.length >= 8) {
+    if (
+      emailRegex.test(fichaEmail) &&
+      fichaName.length >= 5 &&
+      fichaPassword.length >= 8 &&
+      confirmPassword == fichaPassword
+    ) {
       setValid(true);
     } else {
       setValid(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fichaEmail, fichaName, fichaPassword]);
+  }, [fichaEmail, fichaName, fichaPassword, confirmPassword]);
 
   return (
     <div className="content_step">
@@ -254,6 +296,7 @@ export const Step1Register = () => {
               value={fichaEmail}
               onChange={handleEmailChange}
             />
+            {emailUsed ? <p className="body12 gray3 font400">E-mail ja usado</p> : null}
           </div>
 
           <div className="input_step">
@@ -268,6 +311,24 @@ export const Step1Register = () => {
               value={fichaPassword}
               onChange={handlePasswordChange}
             />
+            <p className="body12 gray3 font400">Mínimo de 8 caracteres.</p>
+          </div>
+
+          <div className="input_step">
+            <label htmlFor="confirmPassword" className="body14 font400 gray2 margin4">
+              Confirme sua senha *
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              className="body14 font400 gray2 margin4"
+              value={confirmPassword}
+              onChange={handleRePasswordChange}
+            />
+            {confirmPassword != fichaPassword ? (
+              <p className="body12 gray3 font400">As senhas não são iguais.</p>
+            ) : null}
           </div>
         </div>
       </div>
