@@ -3,11 +3,11 @@ import { HeaderDashboard } from "./../headerDashboard";
 import { Footer } from "./../footer/index";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Spinner } from "./../loading/index";
 
 export const Dashboard = () => {
   const base_url = process.env.REACT_APP_BASE_URL;
   const token = localStorage.getItem("tokenVr");
-
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -17,13 +17,21 @@ export const Dashboard = () => {
 
   const [dados, setDados] = useState([]);
   const [infos, setInfos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get(`${base_url}/infosDashboard`, config).then((response) => {
-      setDados(response.data.users);
-      setInfos(response.data.infos);
-      console.log(response.data);
-    });
+    axios
+      .get(`${base_url}/infosDashboard`, config)
+      .then((response) => {
+        setDados(response.data.users);
+        setInfos(response.data.infos);
+        console.log(response.data);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoading(true);
+        }, 1000);
+      });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -79,70 +87,76 @@ export const Dashboard = () => {
 
   return (
     <>
-      <HeaderDashboard />
-      <ContainerDashboard>
-        <div className="container">
-          <div className="top_dashboard">
-            <h2 className="heading40 white font700">INFORMAÇÕES GERAIS</h2>
+      {loading ? (
+        <>
+          <HeaderDashboard />
+          <ContainerDashboard>
+            <div className="container">
+              <div className="top_dashboard">
+                <h2 className="heading40 white font700">INFORMAÇÕES GERAIS</h2>
 
-            <div className="group_boxs">
-              <div className="box_infos">
-                <div className="circle margin12">
-                  <p className="white">{infos.number_users}</p>
-                </div>
-                <h4 className="heading24 font600 white">Número de Usuários</h4>
-              </div>
-              <div className="box_infos">
-                <div className="circle margin12">
-                  <p className="white">{infos.number_users_work}</p>
-                </div>
-                <h4 className="heading24 font600 white">Usuários Trabalhando</h4>
-              </div>
-              <div className="box_infos">
-                <div className="circle margin12">
-                  <p className="white">{infos.number_posts}</p>
-                </div>
-                <h4 className="heading24 font600 white">Número de Posts</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="bottom_dashboard">
-            <h2 className="heading40 white font700">ÚLTIMOS CANDIDATOS</h2>
-            <div className="table_content">
-              <table>
-                <thead>
-                  <tr>
-                    <th className="body12 font600 gray2">#</th>
-                    <th className="body12 font600 gray2">Nome</th>
-                    <th className="body12 font600 gray2">Gênero</th>
-                    <th className="body12 font600 gray2">Cidade</th>
-                    <th className="body12 font600 gray2">Estado</th>
-                    <th className="body12 font600 gray2">Idade</th>
-                    <th className="body12 font600 gray2">Trabalha Na Area</th>
-                    <th className="body12 font600 gray2">Função de atuação</th>
-                    <th className="body12 font600 gray2">Tempo de atuação</th>
-                    <th className="body12 font600 gray2">Gosta do que faz</th>
-                    <th className="body12 font600 gray2">Registrado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dados.length >= 1 ? (
-                    RenderMap()
-                  ) : (
-                    <div className="no_testes" key={1}>
-                      <h3 className="heading32 gray2 margin12">
-                        não possui nenhum usuário cadastrado nessa lista.
-                      </h3>
+                <div className="group_boxs">
+                  <div className="box_infos">
+                    <div className="circle margin12">
+                      <p className="white">{infos.number_users}</p>
                     </div>
-                  )}
-                </tbody>
-              </table>
+                    <h4 className="heading24 font600 white">Número de Usuários</h4>
+                  </div>
+                  <div className="box_infos">
+                    <div className="circle margin12">
+                      <p className="white">{infos.number_users_work}</p>
+                    </div>
+                    <h4 className="heading24 font600 white">Usuários Trabalhando</h4>
+                  </div>
+                  <div className="box_infos">
+                    <div className="circle margin12">
+                      <p className="white">{infos.number_posts}</p>
+                    </div>
+                    <h4 className="heading24 font600 white">Número de Posts</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bottom_dashboard">
+                <h2 className="heading40 white font700">ÚLTIMOS CANDIDATOS</h2>
+                <div className="table_content">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="body12 font600 gray2">#</th>
+                        <th className="body12 font600 gray2">Nome</th>
+                        <th className="body12 font600 gray2">Gênero</th>
+                        <th className="body12 font600 gray2">Cidade</th>
+                        <th className="body12 font600 gray2">Estado</th>
+                        <th className="body12 font600 gray2">Idade</th>
+                        <th className="body12 font600 gray2">Trabalha Na Area</th>
+                        <th className="body12 font600 gray2">Função de atuação</th>
+                        <th className="body12 font600 gray2">Tempo de atuação</th>
+                        <th className="body12 font600 gray2">Gosta do que faz</th>
+                        <th className="body12 font600 gray2">Registrado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dados.length >= 1 ? (
+                        RenderMap()
+                      ) : (
+                        <div className="no_testes" key={1}>
+                          <h3 className="heading32 gray2 margin12">
+                            não possui nenhum usuário cadastrado nessa lista.
+                          </h3>
+                        </div>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </ContainerDashboard>
-      <Footer />
+          </ContainerDashboard>
+          <Footer />
+        </>
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };

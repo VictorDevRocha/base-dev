@@ -42,6 +42,8 @@ export const Step2Register = () => {
   const [modal, setModal] = useState(false);
 
   const handleSubmit = () => {
+    setValid(false);
+
     axios
       .post(
         `${base_url}/user`,
@@ -73,6 +75,9 @@ export const Step2Register = () => {
       })
       .catch(() => {
         alert("Erro ao finalizar o cadastro!");
+      })
+      .finally(() => {
+        setValid(true);
       });
   };
 

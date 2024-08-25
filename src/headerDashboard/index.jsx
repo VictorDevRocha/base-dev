@@ -4,9 +4,29 @@ import logo from "/logo.svg";
 import iconAvatar from "/svg/dashboard/avatar.svg";
 import iconLogout from "/svg/dashboard/logout.svg";
 import close from "/svg/dashboard/close.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const HeaderDashboard = () => {
+  const base_url = process.env.REACT_APP_BASE_URL;
+  const token = localStorage.getItem("tokenVr");
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Barrer ${token}`,
+    },
+  };
+
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${base_url}/user`, config).then((response) => {
+      setUser(response.data);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const history = useNavigate();
 
   const logout = () => {
@@ -55,6 +75,7 @@ export const HeaderDashboard = () => {
             </Link>
           </ul>
           <div className="left_header">
+            <h6 className="heading16 font700 primary_light">{user.name}</h6>
             <div className="box_avatar avatar pointer">
               <img
                 src={iconAvatar}
