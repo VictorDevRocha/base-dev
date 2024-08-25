@@ -77,13 +77,7 @@ export const Step2Register = () => {
   };
 
   useEffect(() => {
-    if (
-      fichaArea != "" &&
-      fichaAttention != "" &&
-      fichaWork != "" &&
-      fichaTime != "" &&
-      fichaLike != ""
-    ) {
+    if (fichaArea != "" && fichaAttention != "" && fichaWork != "" && fichaTime != "" && fichaLike != "") {
       setValid(true);
     } else {
       setValid(false);
@@ -125,6 +119,7 @@ export const Step2Register = () => {
           </button>
         </div>
       </ModalCheck>
+
       <div className="content_step">
         <div className="top_step">
           <p className="overline16 gray font700 upper margin8">Etapa {stepRegister} de 2</p>
@@ -269,6 +264,9 @@ export const Step2Register = () => {
                 </option>
                 <option value="Arquiteto de Software" className="body14 font400 gray2">
                   Arquiteto de Software
+                </option>
+                <option value="Outro" className="body14 font400 gray2">
+                  Outro
                 </option>
               </select>
             </div>

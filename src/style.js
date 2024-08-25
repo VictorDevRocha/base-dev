@@ -271,7 +271,7 @@ button {
 
 .container {
   width: 100%;
-  max-width: 1216px;
+  max-width: 1224px;
   margin: 0 auto;
 }
 
@@ -452,11 +452,11 @@ button {
 }
 
 .disable {
-  display: none;
+  display: none !important;
 }
 
-.poRoboto {
-  cursor: poRoboto;
+.pointer {
+  cursor: pointer;
 }
 .relative {
   position: relative;

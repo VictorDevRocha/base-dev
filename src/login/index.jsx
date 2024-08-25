@@ -38,8 +38,8 @@ export const Login = () => {
           password: password,
         })
         .then((response) => {
-          localStorage.setItem("idUser", response.data.id);
-          localStorage.setItem("token", response.data.id);
+          localStorage.setItem("idUserVr", response.data.user.id);
+          localStorage.setItem("tokenVr", response.data.token);
           history("/dashboard");
         })
         .catch((error) => {
