@@ -219,6 +219,7 @@ export const Step1Register = () => {
               </option>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
 

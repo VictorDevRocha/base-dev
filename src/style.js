@@ -455,6 +455,11 @@ button {
   display: none !important;
 }
 
+.highlighted {
+  background-color: yellow !important; 
+  display: inline;
+}
+
 .pointer {
   cursor: pointer;
 }

@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { Login } from "./login";
 import { Register } from "./register";
 import { Dashboard } from "./dashboard";
+import { Usuarios } from "./user";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route index path="/" element={<Login />} />
             <Route path="/cadastro" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/usuarios" element={<Usuarios />} />
           </Route>
         </Routes>
       </Router>
