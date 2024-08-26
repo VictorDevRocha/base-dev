@@ -72,6 +72,17 @@ export const Step1Register = () => {
     }
   };
 
+  const handleNameBlur = (e) => {
+    let value = e.target.value.trim();
+
+    value = value
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+
+    setFichaName(value);
+  };
+
   const handlePhoneChange = (e) => {
     let input = e.target.value;
 
@@ -121,6 +132,12 @@ export const Step1Register = () => {
     } else {
       e.target.classList.add("error");
     }
+  };
+
+  const handleEmailBlur = (e) => {
+    const trimmedValue = e.target.value.trim();
+    setFichaEmail(trimmedValue);
+    e.target.value = trimmedValue;
   };
 
   const handlePasswordChange = (e) => {
@@ -185,6 +202,7 @@ export const Step1Register = () => {
               className="body14 font400 gray2 margin4"
               value={fichaName}
               onChange={handleNameChange}
+              onBlur={handleNameBlur}
             />
           </div>
 
@@ -299,6 +317,7 @@ export const Step1Register = () => {
               className="body14 font400 gray2 margin4"
               value={fichaEmail}
               onChange={handleEmailChange}
+              onBlur={handleEmailBlur}
             />
             {emailUsed ? <p className="body12 gray3 font400">E-mail ja usado</p> : null}
           </div>

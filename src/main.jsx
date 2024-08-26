@@ -7,6 +7,7 @@ import { Login } from "./login";
 import { Register } from "./register";
 import { Dashboard } from "./dashboard";
 import { Usuarios } from "./user";
+import { Comunidade } from "./comunidade";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/cadastro" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/usuarios" element={<Usuarios />} />
+            <Route path="/comunidade" element={<Comunidade />} />
           </Route>
         </Routes>
       </Router>

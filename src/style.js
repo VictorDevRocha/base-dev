@@ -463,7 +463,14 @@ button {
 .pointer {
   cursor: pointer;
 }
+
 .relative {
   position: relative;
 }
+
+.upper {
+  text-transform: uppercase;
+}
+
+
 `;
